@@ -1,0 +1,10 @@
+/* The project involves a smart cafe in which clients can vote for the background music (and other features) only by placing their 
+** cups on a certain position on the table.  
+** This code is used by a Raspberry Pi, with two NFC readers connected to it via SPI.
+** The NFC readers are placed under a table and allow users to vote, with a NFC tag place under a cup, for either classical or rock music.
+** The NFC readers share the same MISO, MOSI, CLK, which means that they need to be multiplexed. 
+** To do that the RST and CS lines in the SPI software configurations are switched to access the two boards.
+** The main program is readID.c, which uses nfc.c to interface with the NFC boards, extract information, group it together and send it 
+** via a named pipe to mosquitto_client.c, which splits the data and sends it out to the network via MQTT messages.
+** This was required as the wiringPi libraries and the mosquitto library were not compatible. 
+*/
